@@ -1,4 +1,3 @@
-# train.py
 import mlflow
 import numpy as np
 from sklearn.datasets import make_classification
@@ -6,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import random
+import os
 
 X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -19,7 +19,13 @@ accuracy = accuracy_score(y_test, y_pred)
 if random.random() < 0.3:
     accuracy = accuracy * 0.7
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+if not tracking_uri:
+    print("ERROR: MLFLOW_TRACKING_URI not set!")
+    exit(1)
+
+mlflow.set_tracking_uri(tracking_uri)
+print(f"Using MLflow tracking URI: {tracking_uri}")
 
 with mlflow.start_run() as run:
     mlflow.log_param("model_type", "RandomForest")
@@ -28,3 +34,6 @@ with mlflow.start_run() as run:
     
     with open("model_info.txt", "w") as f:
         f.write(run.info.run_id)
+    
+    print(f"Run ID: {run.info.run_id}")
+    print(f"Accuracy: {accuracy:.4f}")
