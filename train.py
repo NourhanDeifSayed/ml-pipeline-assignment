@@ -26,6 +26,7 @@ if not dagshub_token:
 
 tracking_uri = f"https://oauth2:{dagshub_token}@dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
 mlflow.set_tracking_uri(tracking_uri)
+print(f"Tracking URI: {tracking_uri.replace(dagshub_token, '***')}")
 
 with mlflow.start_run() as run:
     mlflow.log_param("n_estimators", 100)

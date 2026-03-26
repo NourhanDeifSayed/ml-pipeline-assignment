@@ -20,8 +20,8 @@ print(f"Run ID: {run_id}")
 print(f"Accuracy: {accuracy:.4f}")
 
 if accuracy >= 0.85:
-    print("PASSED - Accuracy meets threshold. Proceeding to deployment.")
+    print("PASSED - Accuracy meets threshold.")
     sys.exit(0)
 else:
-    print(f"FAILED - Accuracy {accuracy:.4f} is below 0.85 threshold.")
+    print(f"FAILED - Accuracy {accuracy:.4f} is below 0.85.")
     sys.exit(1)
