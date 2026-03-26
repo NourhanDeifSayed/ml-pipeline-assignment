@@ -1,7 +1,6 @@
 import mlflow
 import sys
 import os
-import dagshub
 
 with open("model_info.txt", "r") as f:
     run_id = f.read().strip()
@@ -10,8 +9,6 @@ dagshub_token = os.getenv("DAGSHUB_TOKEN")
 if not dagshub_token:
     print("ERROR: DAGSHUB_TOKEN not set!")
     sys.exit(1)
-
-dagshub.init(repo_owner='NourhanDeifSayed', repo_name='ml-pipeline-assignment', mlflow=True)
 
 os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
 os.environ["MLFLOW_TRACKING_PASSWORD"] = ""

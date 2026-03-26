@@ -24,7 +24,10 @@ if not dagshub_token:
     print("ERROR: DAGSHUB_TOKEN not set!")
     exit(1)
 
-tracking_uri = f"https://{dagshub_token}@dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = ""
+
+tracking_uri = "https://dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
 mlflow.set_tracking_uri(tracking_uri)
 
 with mlflow.start_run() as run:
