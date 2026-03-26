@@ -20,7 +20,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install mlflow scikit-learn numpy dvc dagshub
+          pip install mlflow scikit-learn numpy dvc
       
       - name: Pull data with DVC
         run: |
@@ -51,7 +51,7 @@ jobs:
           python-version: '3.10'
       
       - name: Install dependencies
-        run: pip install mlflow dagshub
+        run: pip install mlflow
       
       - name: Download model info
         uses: actions/download-artifact@v4
