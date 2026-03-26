@@ -20,7 +20,11 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install mlflow scikit-learn numpy
+          pip install mlflow scikit-learn numpy dvc
+      
+      - name: Pull data with DVC
+        run: |
+          dvc pull || echo "DVC pull skipped - no remote"
       
       - name: Train model
         run: python train.py
