@@ -10,8 +10,8 @@ if not dagshub_token:
     print("ERROR: DAGSHUB_TOKEN not set!")
     sys.exit(1)
 
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = ""
+os.environ["MLFLOW_TRACKING_USERNAME"] = "NourhanDeifSayed"
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
 tracking_uri = "https://dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
 mlflow.set_tracking_uri(tracking_uri)
