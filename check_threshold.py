@@ -5,11 +5,12 @@ import os
 with open("model_info.txt", "r") as f:
     run_id = f.read().strip()
 
-tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
-if not tracking_uri:
-    print("ERROR: MLFLOW_TRACKING_URI not set!")
+dagshub_token = os.getenv("DAGSHUB_TOKEN")
+if not dagshub_token:
+    print("ERROR: DAGSHUB_TOKEN not set!")
     sys.exit(1)
 
+tracking_uri = f"https://oauth2:{dagshub_token}@dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
 mlflow.set_tracking_uri(tracking_uri)
 
 run = mlflow.get_run(run_id)

@@ -19,16 +19,15 @@ accuracy = accuracy_score(y_test, y_pred)
 if random.random() < 0.3:
     accuracy = accuracy * 0.7
 
-tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
-if not tracking_uri:
-    print("ERROR: MLFLOW_TRACKING_URI not set!")
+dagshub_token = os.getenv("DAGSHUB_TOKEN")
+if not dagshub_token:
+    print("ERROR: DAGSHUB_TOKEN not set!")
     exit(1)
 
+tracking_uri = f"https://oauth2:{dagshub_token}@dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
 mlflow.set_tracking_uri(tracking_uri)
-print(f"Using MLflow tracking URI: {tracking_uri}")
 
 with mlflow.start_run() as run:
-    mlflow.log_param("model_type", "RandomForest")
     mlflow.log_param("n_estimators", 100)
     mlflow.log_metric("accuracy", accuracy)
     
