@@ -6,7 +6,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import random
 import os
-import dagshub
 
 X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -25,12 +24,7 @@ if not dagshub_token:
     print("ERROR: DAGSHUB_TOKEN not set!")
     exit(1)
 
-dagshub.init(repo_owner='NourhanDeifSayed', repo_name='ml-pipeline-assignment', mlflow=True)
-
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = ""
-
-tracking_uri = "https://dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
+tracking_uri = f"https://{dagshub_token}@dagshub.com/NourhanDeifSayed/ml-pipeline-assignment.mlflow"
 mlflow.set_tracking_uri(tracking_uri)
 
 with mlflow.start_run() as run:
